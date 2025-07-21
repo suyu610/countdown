@@ -20,7 +20,7 @@ void main() async {
 }
 
 initWindowsManager() async {
-  if (Platform.isWindows) {
+  if (Platform.isWindows || Platform.isMacOS) {
     await windowManager.ensureInitialized();
     WindowOptions windowOptions = const WindowOptions(
         fullScreen: false,

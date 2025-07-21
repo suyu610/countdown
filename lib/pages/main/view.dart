@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -68,7 +67,7 @@ class MainController extends GetxController {
   }
 
   void notify(title, body) {
-    if (Platform.isWindows) {
+    if (Platform.isWindows || Platform.isMacOS) {
       LocalNotification notification = LocalNotification(
         title: title,
         body: body,
@@ -297,7 +296,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
       mainController.updateHeatMapItem();
       mainController.getGithubStarCount();
     });
-    if (Platform.isWindows) {
+    if (Platform.isWindows || Platform.isMacOS) {
       initTray();
     }
   }
