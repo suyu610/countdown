@@ -122,9 +122,12 @@ class _MainPageState extends State<MainPage> with TrayListener {
   @override
   Widget build(BuildContext context) {
     MainController mainController = Get.find();
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final isSmall = width < 400;
 
     return AdvancedDrawer(
-        openRatio: .3,
+        openRatio: isSmall ? .55 : .3,
         backdrop: Container(
           width: double.infinity,
           height: double.infinity,
@@ -157,7 +160,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
                   children: [
                     Positioned(
                       top: 20,
-                      left: 40,
+                      left: isSmall ? 20 : 40,
                       child: SettingBtn(),
                     ),
                     Positioned(
@@ -185,6 +188,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
                                       mainController.githubStarCount.value
                                           .toString(),
                                       style: TextStyle(
+                                          fontSize: isSmall ? 18 : 14,
                                           color: colorPalette[4],
                                           fontFamily: "huawei"),
                                     ))),
@@ -202,6 +206,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
                                       mainController.bilibiliFansCount.value
                                           .toString(),
                                       style: TextStyle(
+                                          fontSize: isSmall ? 18 : 14,
                                           color: colorPalette[
                                               4], // Color(0xffe3b341),
                                           fontFamily: "huawei"),
@@ -212,6 +217,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
                             GestureDetector(
                               onTap: () {
                                 mainController.getGithubStarCount();
+                                mainController.notify("hello", "world");
                               },
                               child: Icon(
                                 Icons.refresh,
@@ -221,32 +227,37 @@ class _MainPageState extends State<MainPage> with TrayListener {
                             )
                           ],
                         )),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        HeatMap(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Countdown(
-                              title: "下班倒计时",
-                              endTime: endTime,
-                              format: CountDownTimerFormat.hoursMinutesSeconds,
-                            ),
-                            Countdown(
-                              title: "发工资剩余天数",
-                              endTime: salaryEndTime,
-                              format: CountDownTimerFormat.daysOnly,
-                            ),
-                            Countdown(
-                              title: "考试倒计时",
-                              endTime: examEndTime,
-                              format: CountDownTimerFormat.daysOnly,
-                            ),
-                          ],
-                        ),
-                      ],
+                    Padding(
+                      padding: EdgeInsets.all(isSmall ? 20.0 : 0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          HeatMap(),
+                          SizedBox(height: 20),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Countdown(
+                                title: "下班倒计时",
+                                endTime: endTime,
+                                format:
+                                    CountDownTimerFormat.hoursMinutesSeconds,
+                              ),
+                              Countdown(
+                                title: "发工资剩余天数",
+                                endTime: salaryEndTime,
+                                format: CountDownTimerFormat.daysOnly,
+                              ),
+                              Countdown(
+                                title: "考试倒计时",
+                                endTime: examEndTime,
+                                format: CountDownTimerFormat.daysOnly,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
