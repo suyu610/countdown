@@ -39,4 +39,4 @@ TimeOfDay endWorkTime = TimeOfDay(hour: 8, minute: 30);
 List<Color> colorPalette = colorPaletteGreen;
 Color disableColor = colorPalette[1];
 Color enableColor = colorPalette[5];
-int count = 9 * 60;
+int count =  9 * 60;
