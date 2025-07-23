@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:countdown/style/color_palette.dart';
+import 'package:flutter/material.dart';
 
 DateTime endTime = DateTime.now().copyWith(
   hour: 17,
@@ -32,6 +33,9 @@ DateTime startTime = DateTime.now().copyWith(
   millisecond: 0,
   microsecond: 0,
 );
+
+TimeOfDay endWorkTime = TimeOfDay(hour: 8, minute: 30);
+
 List<Color> colorPalette = colorPaletteGreen;
 Color disableColor = colorPalette[1];
 Color enableColor = colorPalette[5];

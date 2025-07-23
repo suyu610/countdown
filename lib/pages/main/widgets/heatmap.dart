@@ -9,7 +9,6 @@ class HeatMap extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final width = size.width;
-    final height = size.height;
 
     return SizedBox(
       height: 300,
