@@ -11,24 +11,29 @@ class SettingStorageUtil {
   }
 
   /// 当前github点赞数量
-  static int githubCount() {
-    SharedPreferences sp = Get.find<SharedPreferences>();
+  static Future<int> githubCount() async {
+    var sp = await SharedPreferences.getInstance();
     return sp.getInt("githubCount") ?? 0;
   }
 
   static void setGithubCount(int count) {
-    SharedPreferences sp = Get.find<SharedPreferences>();
-    sp.setInt("githubCount", count);
+    SharedPreferences.getInstance().then((sp) {
+      sp.setInt("githubCount", count);
+    });
   }
 
   /// 当前bilibili点赞数量
-  static int bilibiliCount() {
-    SharedPreferences sp = Get.find<SharedPreferences>();
+  static Future<int> bilibiliCount() async {
+    // SharedPreferences sp = Get.find<SharedPreferences>();
+    // return sp.getInt("bilibiliCount") ?? 0;
+
+    var sp = await SharedPreferences.getInstance();
     return sp.getInt("bilibiliCount") ?? 0;
   }
 
   static void setBilibiliCount(int count) {
-    SharedPreferences sp = Get.find<SharedPreferences>();
-    sp.setInt("bilibiliCount", count);
+    SharedPreferences.getInstance().then((sp) {
+      sp.setInt("bilibiliCount", count);
+    });
   }
 }

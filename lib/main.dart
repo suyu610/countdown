@@ -1,21 +1,20 @@
 import 'dart:io';
 
 import 'package:countdown/pages/main/view.dart';
+import 'package:countdown/pages/tax/view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:local_notifier/local_notifier.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   initWindowsManager();
-  await Get.putAsync(() => SharedPreferences.getInstance());
+
   await localNotifier.setup(
     appName: '打工倒计时',
     shortcutPolicy: ShortcutPolicy.requireCreate,
   );
+
   runApp(_myApp());
 }
 
@@ -44,7 +43,8 @@ Widget _myApp() {
     debugShowCheckedModeBanner: false,
     routes: {
       "/main": (context) => const MainPage(),
+      "/tax": (context) => const TaxPage()
     },
-    initialRoute: "/main",
+    initialRoute: "/tax",
   );
 }
