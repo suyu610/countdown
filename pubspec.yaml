@@ -25,6 +25,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   local_notifier: ^0.1.6
   board_datetime_picker: ^2.8.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:

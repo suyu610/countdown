@@ -15,6 +15,7 @@ import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 import 'package:get/get.dart';
 import 'package:local_notifier/local_notifier.dart';
 import 'package:tray_manager/tray_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:http/http.dart' as http;
 
@@ -83,24 +84,31 @@ class _MainPageState extends State<MainPage> with TrayListener {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 GestureDetector(
-                                  onTap: () {},
-                                  child: SvgPicture.network(
-                                    "https://www.uuorb.com/img/social/github.svg",
-                                    colorFilter: ColorFilter.mode(
-                                        colorPalette[4], BlendMode.srcIn),
-                                    height: 16,
-                                    width: 16,
+                                  onTap: () async {
+                                    await launchUrl(Uri.parse(
+                                        "https://github.com/suyu610/journal-flutter"));
+                                  },
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.network(
+                                        "https://www.uuorb.com/img/social/github.svg",
+                                        colorFilter: ColorFilter.mode(
+                                            colorPalette[4], BlendMode.srcIn),
+                                        height: 16,
+                                        width: 16,
+                                      ),
+                                      SizedBox(width: 2),
+                                      Obx(() => (Text(
+                                            mainController.githubStarCount.value
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: isSmall ? 18 : 14,
+                                                color: colorPalette[4],
+                                                fontFamily: "huawei"),
+                                          ))),
+                                    ],
                                   ),
                                 ),
-                                SizedBox(width: 2),
-                                Obx(() => (Text(
-                                      mainController.githubStarCount.value
-                                          .toString(),
-                                      style: TextStyle(
-                                          fontSize: isSmall ? 18 : 14,
-                                          color: colorPalette[4],
-                                          fontFamily: "huawei"),
-                                    ))),
                                 SizedBox(width: 10),
                                 SvgPicture.network(
                                   "https://www.uuorb.com/img/social/bilibili.svg",
@@ -126,7 +134,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
                             GestureDetector(
                               onTap: () {
                                 mainController.getGithubStarCount();
-                                mainController.notify("hello", "world");
+                                // mainController.notify("hello", "world");
                               },
                               child: Icon(
                                 Icons.refresh,
@@ -244,13 +252,13 @@ class MainController extends GetxController {
   void getGithubStarCount() async {
     bilibiliFansCount.value = 0;
     githubStarCount.value = 0;
-    var url = Uri.parse("https://www.uuorb.com/api/github/star");
+    var url = Uri.parse("https://uuorb.com/api/github/star");
     var response = await http.get(url);
     // 转 json
 
     githubStarCount.value = int.tryParse(response.body) ?? 0;
 
-    url = Uri.parse("https://www.uuorb.com/api/fans/bilibili");
+    url = Uri.parse("https://uuorb.com/api/fans/bilibili");
     response = await http.get(url);
 
     // 转 json

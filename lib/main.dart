@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:countdown/pages/main/view.dart';
-import 'package:countdown/pages/tax/view.dart';
 import 'package:flutter/material.dart';
 import 'package:local_notifier/local_notifier.dart';
 import 'package:window_manager/window_manager.dart';
@@ -43,8 +42,7 @@ Widget _myApp() {
     debugShowCheckedModeBanner: false,
     routes: {
       "/main": (context) => const MainPage(),
-      "/tax": (context) => const TaxPage()
     },
-    initialRoute: "/tax",
+    initialRoute: "/main",
   );
 }
