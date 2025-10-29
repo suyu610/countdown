@@ -105,7 +105,7 @@ class _MainPageState extends State<MainPage> with TrayListener {
                                                 fontSize: isSmall ? 18 : 14,
                                                 color: colorPalette[4],
                                                 fontFamily: "huawei"),
-                                          ))),
+                                          )))
                                     ],
                                   ),
                                 ),
